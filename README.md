@@ -1,7 +1,9 @@
 ## Menggunakan Laravel
 1. clone repositories ini
 2. copy file .env.example ke .env
-3. composer install
+3. Lakukan Instalasi modul Laravel
+```bash
+composer install
 ```
 4. lakukan migrate untuk menambahkan sqlite (database)
 ```bash
