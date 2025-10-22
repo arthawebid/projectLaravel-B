@@ -4,7 +4,7 @@
 ```bash
 copy .env.example .env
 ```
-4. lakukan install/update modul-modul laravel
+3. lakukan install/update modul-modul laravel
 ```bash
 composer install
 ```
@@ -15,6 +15,10 @@ php artisan migrate
 5. generate key
 ```bash
 php artisan key:generate
+```
+6. Aktifkan internal Laravel Server
+```bash
+php artisan serve
 ```
 
 
