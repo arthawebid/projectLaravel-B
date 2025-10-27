@@ -6,8 +6,7 @@ use Illuminate\Http\Request;
 
 class TemanController extends Controller
 {
-    public function index(){
-        $dta = [
+    private $dta = [
             [
                 "idbuku" => 1,
                 "namateman" => "Rudi Iswantoro Diatmojo",
@@ -23,6 +22,19 @@ class TemanController extends Controller
                 "wa" => "0811223344",
             ],
         ];
+    public function index(){
+        $dta = $this->dta;
         return view('teman', compact('dta') );
     }
+
+    public function temandetail($id){
+        $t = collect($this->dta)->firstWhere('idbuku',$id);
+        
+        if(!$t){
+            abort(404,"Data Teman dengan $id tidak ditemukan");
+        }
+
+        return view('temandetail', compact('t') );
+    }
+
 }

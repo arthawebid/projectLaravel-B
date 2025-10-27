@@ -7,3 +7,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/teman', [TemanController::class, 'index'])->name('datateman');
+Route::get('/teman/{id}', [TemanController::class, 'temandetail'])->name('tmdetail');

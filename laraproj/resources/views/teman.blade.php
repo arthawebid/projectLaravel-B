@@ -10,8 +10,7 @@
         <tr>
           <th>Nama</th>
           <th>Alamat</th>
-          <th>Kota</th>
-          <th>Nomor WA</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -19,8 +18,7 @@
         <tr>
           <td>{{ $tm["namateman"] }}</td>
           <td>{{ $tm["alamat"] }}</td>
-          <td>{{ $tm["kota"] }}</td>
-          <td>{{ $tm["wa"] }}</td>
+          <td><a class="btn btn-sm btn-warning" href="{{ route('tmdetail', $tm['idbuku'] ) }}"> Detail </a></td>
         </tr>
         @endforeach
         
