@@ -21,6 +21,7 @@ class temansController extends Controller
      */
     public function create()
     {
+        // https://github.com/arthawebid/projectLaravel-B/tree/main/laraproj
         return view('sobat.create');
     }
 
@@ -29,7 +30,20 @@ class temansController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'nama'   => 'required|string|max:50',
+            'alamat' => 'required|string',
+            'kota'   => 'required|string|max:50',
+            'telp'   => 'required|string|max:20',
+        ]);
+
+        // Tambahkan timestamp karena menggunakan query builder
+        $data['created_at'] = now();
+        $data['updated_at'] = now();
+
+        DB::table('temans')->insert($data);
+
+        return redirect()->route('sobat.index')->with('success', 'Data berhasil disimpan.');
     }
 
     /**
@@ -45,7 +59,13 @@ class temansController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $d = DB::table('temans')->where('id', $id)->first();
+
+        if (! $d) {
+            return redirect()->route('sobat.index')->with('error', 'Data tidak ditemukan.');
+        }
+
+        return view('sobat.edit', compact('d'));
     }
 
     /**
@@ -53,7 +73,18 @@ class temansController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $data = $request->validate([
+            'nama'   => 'required|string|max:50',
+            'alamat' => 'required|string',
+            'kota'   => 'required|string|max:50',
+            'telp'   => 'required|string|max:20',
+        ]);
+
+        $data['updated_at'] = now();
+
+        DB::table('temans')->where('id', $id)->update($data);
+
+        return redirect()->route('sobat.index')->with('success', 'Data berhasil diperbarui.');
     }
 
     /**
@@ -61,6 +92,14 @@ class temansController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $d = DB::table('temans')->where('id', $id)->first();
+
+        if (! $d) {
+            return redirect()->route('sobat.index')->with('error', 'Data tidak ditemukan.');
+        }
+
+        DB::table('temans')->where('id', $id)->delete();
+
+        return redirect()->route('sobat.index')->with('success', 'Data berhasil dihapus.');
     }
 }
