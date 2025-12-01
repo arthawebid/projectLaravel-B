@@ -10,7 +10,7 @@
     <div class="container">
         <nav class="nav">
         <a class="nav-link active" aria-current="page" href="./">Home</a>
-        <a class="nav-link" href="{{ route('datateman') }}">Teman</a>
+        <a class="nav-link" href="{{ route('sobat.index') }}">Teman</a>
         </nav>
     </div>
 

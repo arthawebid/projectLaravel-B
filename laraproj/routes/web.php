@@ -1,10 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\TemanController;
+use App\Http\Controllers\temansController;
 
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/teman', [TemanController::class, 'index'])->name('datateman');
-Route::get('/teman/{id}', [TemanController::class, 'temandetail'])->name('tmdetail');
+
+Route::resource('/sobat',temansController::class);
