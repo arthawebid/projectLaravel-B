@@ -21,7 +21,7 @@ class temansController extends Controller
      */
     public function create()
     {
-        //
+        return view('sobat.create');
     }
 
     /**

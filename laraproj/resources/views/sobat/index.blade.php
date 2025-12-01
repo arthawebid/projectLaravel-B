@@ -1,6 +1,7 @@
 <div class="container">
     <h3>Data Sobat</h3>
 
+        <a href="{{ route('sobat.create') }}"> Tambah Data </a>
     <table>
         <thead>
             <tr>
