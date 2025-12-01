@@ -8,6 +8,7 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
+     * https://github.com/arthawebid/projectLaravel-B
      */
     public function up(): void
     {
