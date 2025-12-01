@@ -17,7 +17,7 @@ return new class extends Migration
             $tb->string('nama',50);
             $tb->string('alamat');
             $tb->string('kota',50);
-            $tb->string('wa',20);
+            $tb->string('telp',20);
             $tb->timestamps();
         });
     }
