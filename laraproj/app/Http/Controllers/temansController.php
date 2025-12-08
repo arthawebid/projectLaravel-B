@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\Teman;
 
 class temansController extends Controller
 {
@@ -12,7 +13,8 @@ class temansController extends Controller
      */
     public function index()
     {
-        $dta = DB::table('temans')->get();
+        //$dta = DB::table('temans')->get(); //menggunakan kelas DB
+        $dta = Teman::all();   //menggunakan Model Teman
         return view('sobat.index', compact('dta'));
     }
 
@@ -41,7 +43,13 @@ class temansController extends Controller
         $data['created_at'] = now();
         $data['updated_at'] = now();
 
-        DB::table('temans')->insert($data);
+        // DB::table('temans')->insert($data);
+        Teman::create([
+            'nama'=>$request->nama,
+            'alamat'=>$request->alamat,
+            'kota'=>$request->kota,
+            'telp'=>$request->telp,
+        ]);
 
         return redirect()->route('sobat.index')->with('success', 'Data berhasil disimpan.');
     }
@@ -59,7 +67,8 @@ class temansController extends Controller
      */
     public function edit(string $id)
     {
-        $d = DB::table('temans')->where('id', $id)->first();
+        //$d = DB::table('temans')->where('id', $id)->first();
+        $d = Teman::findOrFail($id);
 
         if (! $d) {
             return redirect()->route('sobat.index')->with('error', 'Data tidak ditemukan.');
@@ -71,7 +80,8 @@ class temansController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    //public function update(Request $request, string $id)
+    public function update(Request $request, Teman $sobat)
     {
         $data = $request->validate([
             'nama'   => 'required|string|max:50',
@@ -80,9 +90,11 @@ class temansController extends Controller
             'telp'   => 'required|string|max:20',
         ]);
 
-        $data['updated_at'] = now();
+        //$data['updated_at'] = now();
 
-        DB::table('temans')->where('id', $id)->update($data);
+        //DB::table('temans')->where('id', $id)->update($data);
+
+        $sobat->update($data);
 
         return redirect()->route('sobat.index')->with('success', 'Data berhasil diperbarui.');
     }
@@ -90,8 +102,10 @@ class temansController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    //public function destroy(string $id)
+    public function destroy(Teman $sobat)
     {
+        /*
         $d = DB::table('temans')->where('id', $id)->first();
 
         if (! $d) {
@@ -99,7 +113,8 @@ class temansController extends Controller
         }
 
         DB::table('temans')->where('id', $id)->delete();
-
+        */
+        $sobat->delete();
         return redirect()->route('sobat.index')->with('success', 'Data berhasil dihapus.');
     }
 }
